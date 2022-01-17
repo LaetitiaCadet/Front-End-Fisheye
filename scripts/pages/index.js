@@ -1,28 +1,16 @@
     async function getPhotographers() {
         // Penser à remplacer par les données récupérées dans le json
-        const photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
+        //je met une pose sur le code avec le mot-clé "await" et je récupère les données avec 
+        //la fonction fetch() avec en argument l'url de mon fichier data 
+        try {
+            const response = await fetch('../../data/photographers.json');
+            const photographers = await response.json()
         // et bien retourner le tableau photographers seulement une fois
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
+        //Je retourne le tableau d'objet en un format JSon
+            return photographers   
+        } catch(err) {
+            alert(err)
+        }
     }
 
     async function displayData(photographers) {
@@ -32,6 +20,7 @@
             const photographerModel = photographerFactory(photographer);
             const userCardDOM = photographerModel.getUserCardDOM();
             photographersSection.appendChild(userCardDOM);
+
         });
     };
 

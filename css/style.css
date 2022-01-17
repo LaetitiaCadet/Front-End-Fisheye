@@ -39,6 +39,11 @@ h1 {
     flex-direction: column;
 }
 
+.photographer_section article div {
+    text-align: center;
+    margin: 10px 0;
+}
+
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
@@ -47,4 +52,6 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 100px;
+    object-fit: cover;
 }
