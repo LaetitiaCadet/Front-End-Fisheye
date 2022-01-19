@@ -6,11 +6,21 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
 }
 
+.photograph-header article h2 {
+    color: #D3573C;
+    font-size: 36px;
+    font-weight: 400;
+} 
+
 .profil-photo {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     border-radius: 100px;
     object-fit: cover;
 }

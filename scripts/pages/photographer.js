@@ -2,7 +2,12 @@
 //avec URLSearchParams je 
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id"); // 
+
 const photographHeader = document.querySelector(".photograph-header");
+const photographMedias = document.createElement('div');
+const main = document.getElementById('main'); 
+main.appendChild(photographMedias);
+photographMedias.classList.add('photograph-medias');
 console.log(id)
 
 function filterUser(users){
@@ -46,10 +51,23 @@ async function displayProfil(users) {
 
 };
 
+async function displayMedia(mediasUser) {
+    mediasUser.forEach((media) => {
+        const photographerMediaModel = photographerFactory(media)
+        const userMediaDOM = photographerMediaModel.showMedia(media)
+        photographMedias.appendChild(userMediaDOM);
+        console.log(photographerMediaModel)
+        console.log(userMediaDOM);
+    })
+
+};
+
 async function init() {
     // Récupère les datas des photographes
     const users = await dataUser();
-    displayProfil(users);    
+    const medias = await dataUserMedia()
+    displayProfil(users);
+    displayMedia(medias)
 };
 
 init()

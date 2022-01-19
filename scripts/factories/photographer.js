@@ -1,9 +1,11 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, price, tagline, id} = data;
+    const { name, portrait, city, country, price, tagline, id, image, video, title, likes} = data;
     
-    const picture = `assets/photographers/${portrait}`;
+    const picture = `assets/photographers/photographersId/${portrait}`;
+    const mediaItems = `assets/photographers/Rhode/${image}`
     const cityCountry = `${city}, `+ `${country}`;
     const photographerLink = `../../photographer.html?id=${id}`;
+    console.log(video)
 
 
     function getUserCardDOM() {
@@ -43,37 +45,81 @@ function photographerFactory(data) {
 
     function getUserProfil(){
         const photographHeader = document.querySelector(".photograph-header"); 
+        const modal = document.querySelector('.contact_button')
         const infoProfil = document.createElement('article');
-        const photoProfil = document.createElement('img');
-        photoProfil.setAttribute('src', picture);
-        photoProfil.classList.add("profil-photo")
+        const photoProfil = document.createElement('article');
 
+        const img = document.createElement('img');
+        img.setAttribute('src', picture);
+        img.classList.add("profil-photo");
 
-        const h1 = document.createElement( 'h1' );
-        h1.textContent = name;
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = name;
 
-        const h3 = document.createElement('h3');
-        h3.textContent = cityCountry;
+        const h1 = document.createElement('h1');
+        h1.textContent = cityCountry;
 
         const p = document.createElement('p'); 
         p.textContent = tagline;
         
+        photographHeader.appendChild(photoProfil)
         photographHeader.appendChild(infoProfil)
+        photographHeader.insertBefore(modal, photographHeader.children[2])
+        infoProfil.appendChild(h2);
         infoProfil.appendChild(h1);
-        infoProfil.appendChild(h3);
         infoProfil.appendChild(p);
-        infoProfil.appendChild(photoProfil);
+        photoProfil.appendChild(img);
+
+        console.log(photographHeader.childNodes)
         
         return (infoProfil);
 
     }
 
     function showMedia(media){
-        if (media.video != undefined){
-            //injecter la video 
+        const mediaSection = document.createElement('div');
+
+        const photo = document.createElement('img');
+        photo.setAttribute('src', mediaItems)
+        const figure = document.createElement('figure');
+        const article = document.createElement('article');
+        const figcaption = document.createElement('figcaption');
+        const section = document.createElement('section');
+        const h4 = document.createElement('h4');
+        h4.textContent = title; 
+        const articleLike = document.createElement('article');
+        const like = document.createElement('span');
+        const compteurLike = document.createElement('p');
+        compteurLike.textContent = likes
+
+
+        article.appendChild(figure);
+        figure.appendChild(photo);
+        figure.appendChild(figcaption);
+        figcaption.appendChild(section);
+        section.appendChild(h4);
+        articleLike.appendChild(like);
+        articleLike.appendChild(compteurLike);
+
+
+
+        console.log(media)
+
+        if (mediaItems.video != undefined){
+            //injecter  la video 
+            console.log("video")
+            const vid = document.createElement('video');
+            vid.setAttribute('src', video);
+            mediaSection.appendChild(vid)
+            
         } else {
             // injecter la photo 
         }
+
+        mediaSection.appendChild(article)
+
+
+        return (mediaSection)
     }
-    return { name, picture, city, country, tagline, price,id, getUserCardDOM, getUserProfil}
+    return { name, picture, city, country, tagline, price,id , image, mediaItems , video, likes, title,  getUserCardDOM, getUserProfil, showMedia}
 }
