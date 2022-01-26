@@ -1,8 +1,8 @@
 function photographerFactory(data) {
     const { name, portrait, city, country, price, tagline, id, image, video, title, likes} = data;
     
-    const picture = `assets/photographers/photographersId/${portrait}`;
-    const mediaItems = `assets/photographers/Rhode/${image}`
+    const picture = `assets/images/photographers/${portrait}`;
+    const mediaItems = `assets/images/media/${image}`
     const cityCountry = `${city}, `+ `${country}`;
     const photographerLink = `../../photographer.html?id=${id}`;
     console.log(video)
@@ -78,7 +78,7 @@ function photographerFactory(data) {
 
     function showMedia(media){
         const mediaSection = document.createElement('div');
-
+        mediaSection.classList.add('media-section');
         const photo = document.createElement('img');
         photo.setAttribute('src', mediaItems)
         const figure = document.createElement('figure');
@@ -88,9 +88,9 @@ function photographerFactory(data) {
         const h4 = document.createElement('h4');
         h4.textContent = title; 
         const articleLike = document.createElement('article');
-        const like = document.createElement('span');
+        const heart = document.createElement('span');
         const compteurLike = document.createElement('p');
-        compteurLike.textContent = likes
+        compteurLike.textContent = likes;
 
 
         article.appendChild(figure);
@@ -98,7 +98,8 @@ function photographerFactory(data) {
         figure.appendChild(figcaption);
         figcaption.appendChild(section);
         section.appendChild(h4);
-        articleLike.appendChild(like);
+        figcaption.appendChild(articleLike);
+        articleLike.appendChild(heart);
         articleLike.appendChild(compteurLike);
 
 

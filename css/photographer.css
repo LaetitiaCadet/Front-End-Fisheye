@@ -91,3 +91,39 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+.photograph-medias {
+    display:flex;
+    flex-wrap: wrap;
+    margin: 0 45px;
+    height: 300px;
+    margin: 0 100px;
+}
+
+.media-section {
+
+}
+
+.media-section article{
+    width:350px ; 
+    height:280px ;
+}
+
+.media-section article figure{
+ margin:0
+}
+
+.media-section article img {
+    width: 100%;
+    height:280px;
+    object-fit: cover;
+}
+
+/* .media-section article figure figcaption {
+
+} */
+
+
+
+
+
