@@ -5,9 +5,14 @@ let id = params.get("id"); //
 
 const photographHeader = document.querySelector(".photograph-header");
 const photographMedias = document.createElement('div');
-const main = document.getElementById('main'); 
+const photographDropdown = document.createElement('div');
+
+const main = document.getElementById('main');
 main.appendChild(photographMedias);
+main.appendChild(photographDropdown);
+
 photographMedias.classList.add('photograph-medias');
+photographDropdown.classList.add('photograph-dropdown');
 console.log(id)
 
 function filterUser(users){
@@ -39,6 +44,27 @@ async function dataUserMedia() {
     return photographeMedia  
 }
 
+async function dataSortBy(){
+     const dropdown = document.getElementById('dropdown');
+
+     dropdown.addEventListener('change', function() {
+         const value = dropdown.value;
+
+         console.log(value);
+     })
+}
+
+dataSortBy()
+
+
+async function displaySortBy(categories){
+    const dropdown = SortFactory.render()
+    photographDropdown.appendChild(dropdown);
+    console.log(dropdown)
+    
+}
+
+
 
 async function displayProfil(users) {
     users.forEach((users) => {
@@ -52,12 +78,12 @@ async function displayProfil(users) {
 };
 
 async function displayMedia(mediasUser) {
+    console.log(mediasUser);
     mediasUser.forEach((media) => {
         const photographerMediaModel = photographerFactory(media)
         const userMediaDOM = photographerMediaModel.showMedia(media)
-        photographMedias.appendChild(userMediaDOM);
+        photographMedias.innerHTML += userMediaDOM;
         console.log(photographerMediaModel)
-        console.log(userMediaDOM);
     })
 
 };
@@ -65,9 +91,10 @@ async function displayMedia(mediasUser) {
 async function init() {
     // Récupère les datas des photographes
     const users = await dataUser();
-    const medias = await dataUserMedia()
+    const medias = await dataUserMedia();
     displayProfil(users);
-    displayMedia(medias)
+    displayMedia(medias);
+    displaySortBy()
 };
 
 init()

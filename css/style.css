@@ -28,6 +28,7 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+    text-align: center;
 }
 
 .photographer_section article {
@@ -38,14 +39,8 @@ h1 {
     flex-direction: column;
 }
 
-.photographer_section article div {
-    text-align: center;
-    margin: 10px 0;
-    text-decoration: none;
-    text-decoration-color: none;
-}
-
 .photographer_section article h2 {
+    text-align: center;
     color: #D3573C;
     font-size: 36px;
     font-weight:400;
@@ -53,8 +48,16 @@ h1 {
 }
 
 .photographer_section article img {
-    height: 150px;
-    width: 150px;
-    border-radius: 100px;
+    height: 256px;
+    width: 260px;
+    border-radius: 100%;
     object-fit: cover;
+}
+
+.photographer_section .info-photographer h4 {
+    color: #901C1C;
+}
+
+.photographer_section .info-photographer span {
+    color:#757575;
 }

@@ -1,3 +1,8 @@
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 #contact_modal {
     display: none;
 }
@@ -19,9 +24,9 @@
 } 
 
 .profil-photo {
-    height: 150px;
-    width: 150px;
-    border-radius: 100px;
+    height: 256px;
+    width: 260px;
+    border-radius: 100%;
     object-fit: cover;
 }
 
@@ -94,35 +99,42 @@ form input {
 
 .photograph-medias {
     display:flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    margin: 0 45px;
-    height: 300px;
-    margin: 0 100px;
+    margin: 150px 100px;
 }
 
-.media-section {
-
+.media-section{
+    display: flex;
 }
 
-.media-section article{
-    width:350px ; 
-    height:280px ;
+.media-section figure{
+    margin: 26px 1px;
 }
 
-.media-section article figure{
- margin:0
-}
-
-.media-section article img {
-    width: 100%;
-    height:280px;
+.media-section img, .media-section video {
+    width: 350px;
+    height: 280px;
+    border-radius: 8px;
     object-fit: cover;
 }
 
-/* .media-section article figure figcaption {
+.media-section figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    color:#901C1C;
+    font-size: 20px;
+}
 
-} */
+.media-section figcaption h4 {
+    font-weight: 400;
+}
 
+.media-section figcaption article {
+    font-weight: 600;
+}
 
 
 
