@@ -101,7 +101,7 @@ form input {
     display:flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 150px 100px;
+    margin: 50px 100px;
 }
 
 .media-section{
@@ -136,6 +136,32 @@ form input {
     font-weight: 600;
 }
 
+.photograph-dropdown{
+    margin: 20px 100px; 
+}
 
+.photograph-dropdown form{
+    display: flex;
+    flex-direction: initial;
+    align-items: center;
+}
+
+.photograph-dropdown form p {
+    margin-right: 20px;
+}
+
+.photograph-dropdown form select{
+    font-family: "DM Sans", sans-serif;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    background-color: #901C1C;
+    border-radius: 8px;
+    color:white;
+    font-weight: bold;
+    font-size:20px;
+    cursor: pointer;
+    border: none;
+}
 
 

@@ -1,17 +1,3 @@
-class SortFactory {
-    static render(){
-        return `
-            <form>
-                <p>Trier par</p>
-                <select size="1" name="categorie" id="dropdown">
-                    <option value='popularity'>Popularité</option>
-                    <option value='date'>Date</option>
-                    <option value='title'>Titre</option>
-                </select>
-            </form>
-        `
-    }
-}
 
 class ImageFactory {
     static render(media) {

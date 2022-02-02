@@ -28,8 +28,6 @@ async function dataUser() {
     // qui se trouve dans le fichier index.js 
     const photographer = await getPhotographers()
     const profils = photographer.photographers;
-    console.log(profils)
-    console.log(filterUser(profils))
     return filterUser(profils)   
 }
 
@@ -38,52 +36,65 @@ async function dataUserMedia() {
     // qui se trouve dans le fichier index.js 
     const photographer = await getPhotographers()
     const medias = photographer.media;
-    console.log(medias)
     const photographeMedia = medias.filter(media => media.photographerId == id)
-    console.log(photographeMedia)
     return photographeMedia  
 }
 
 async function dataSortBy(){
-     const dropdown = document.getElementById('dropdown');
+    const photographer = await getPhotographers()
+    const medias = photographer.media;
+    const photographeMedia = medias.filter(media => media.photographerId == id)
+
+    const dropdown = document.getElementById('dropdown');
+
+    let sortedMedia = []
 
      dropdown.addEventListener('change', function() {
+         photographMedias.innerHTML = "";
          const value = dropdown.value;
 
-         console.log(value);
+
+         if (value == "popularity") {
+           sortedMedia = photographeMedia.sort((a,b) => b.likes - a.likes)
+           console.log(sortedMedia);
+           displayMedia(sortedMedia);
+         }
+         
+         if (value == "date") {
+            sortedMedia = photographeMedia.sort((a,b) => new Date(b.date) - new Date(a.date))
+            console.log(sortedMedia);
+            displayMedia(sortedMedia);
+         }
+
+         if (value == "title"){
+            sortedMedia = photographeMedia.sort((a,b) => {
+                if(a.title < b.title) { return -1; }
+                if(a.title > b.title) { return 1; }
+                return 0;
+            })
+            console.log(sortedMedia);
+            displayMedia(sortedMedia);
+         }  
+        
      })
 }
 
 dataSortBy()
-
-
-async function displaySortBy(categories){
-    const dropdown = SortFactory.render()
-    photographDropdown.appendChild(dropdown);
-    console.log(dropdown)
-    
-}
-
-
 
 async function displayProfil(users) {
     users.forEach((users) => {
         const photographerProfilModel = photographerFactory(users)
         const userProfilDOM = photographerProfilModel.getUserProfil()
         photographHeader.appendChild(userProfilDOM);
-        console.log(photographerProfilModel)
-        console.log(userProfilDOM);
     })
 
 };
 
 async function displayMedia(mediasUser) {
-    console.log(mediasUser);
     mediasUser.forEach((media) => {
         const photographerMediaModel = photographerFactory(media)
         const userMediaDOM = photographerMediaModel.showMedia(media)
         photographMedias.innerHTML += userMediaDOM;
-        console.log(photographerMediaModel)
     })
 
 };
@@ -94,7 +105,6 @@ async function init() {
     const medias = await dataUserMedia();
     displayProfil(users);
     displayMedia(medias);
-    displaySortBy()
 };
 
 init()

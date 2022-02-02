@@ -1,5 +1,5 @@
 function photographerFactory(data) {
-    const { name, portrait, city, country, price, tagline, id, image, video, title, likes } = data;
+    const { name, portrait, city, country, price, tagline, id, image, video, title, likes, date } = data;
 
     const picture = `assets/images/photographers/${portrait}`;
     const mediaItems = `assets/images/media/${image}`
@@ -72,15 +72,8 @@ function photographerFactory(data) {
         infoProfil.appendChild(p);
         photoProfil.appendChild(img);
 
-        console.log(photographHeader.childNodes)
-
         return (infoProfil);
 
-    }
-
-    function sortBy(){
-        const sortBy = SortFactory.render();
-        return sortBy
     }
 
     function showMedia(media) {
@@ -96,5 +89,21 @@ function photographerFactory(data) {
 
         return mediaTag;
     }
-    return { name, picture, city, country, tagline, price, id, image, mediaItems, video, likes, title, getUserCardDOM, getUserProfil, showMedia, sortBy }
+    return { name,
+             picture, 
+             city, 
+             country, 
+             tagline, 
+             price, 
+             id, 
+             image, 
+             mediaItems,
+             video, 
+             likes, 
+             title,
+             date, 
+             getUserCardDOM, 
+             getUserProfil, 
+             showMedia
+            }
 }
