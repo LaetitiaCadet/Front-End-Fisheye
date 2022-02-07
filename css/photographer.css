@@ -156,12 +156,44 @@ form input {
     width: 170px;
     height: 70px;
     background-color: #901C1C;
-    border-radius: 8px;
+    border-radius: 5px;
     color:white;
-    font-weight: bold;
     font-size:20px;
     cursor: pointer;
     border: none;
 }
 
+.photograph-dropdown form select option hr {
+   color:white;
+}
 
+.photograph-dropdown form select option::before {
+    content: ">";
+    font-size: 20px;
+    display: none;
+    border-bottom: 2px solid white;
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+.photograph-dropdown form select option::before:hover {
+    background-color: #901C1C;
+}
+
+
+
+/* lightbox modal */
+#lightbox_modal{
+    display: none;
+    position:fixed;
+}
+
+.lightbox_container {
+    display: flex;
+    background-color: #D3573C;
+    align-items: center;
+    justify-content: center;
+    height:900px;
+    width: 1050px;
+    margin: 0 50px;
+  }

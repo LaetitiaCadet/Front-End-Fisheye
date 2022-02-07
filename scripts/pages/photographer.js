@@ -13,7 +13,12 @@ main.appendChild(photographDropdown);
 
 photographMedias.classList.add('photograph-medias');
 photographDropdown.classList.add('photograph-dropdown');
-console.log(id)
+
+//je stylise ma balise select et ses option en utilisant du js car ces dernières selon les user-agent ne sont pas les mêmes 
+let optionCategories = document.querySelector('option');
+
+optionCategories.style.borderBottom = "2px solid white";
+optionCategories.style.padding = "50px"
 
 function filterUser(users){
     //je récupère le profil du photographe en utilisant la fonction filter qui me permet de comparer si
@@ -22,6 +27,20 @@ function filterUser(users){
     // console.log(filterById);
     return filterById
 }
+
+async function lightboxPlayer(){
+ const btnPrev = document.querySelector("lightbox_prev");
+ const btnNext = document.querySelector("lightbox_next"); 
+
+ const mediaFigure = document.querySelectorAll("media-section");
+
+ mediaFigure.addEventListener("click", function () {
+    displayLightbox()
+    console.log("click")
+ })
+}
+
+lightboxPlayer()
 
 async function dataUser() {
     // je récupère dans ma variable les donnée de mon fichier json dans la fonction getPhotographers
@@ -80,6 +99,10 @@ async function dataSortBy(){
 }
 
 dataSortBy()
+
+async function lightboxPlayer(){
+    
+}
 
 async function displayProfil(users) {
     users.forEach((users) => {
