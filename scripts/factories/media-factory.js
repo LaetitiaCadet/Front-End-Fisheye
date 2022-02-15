@@ -4,13 +4,16 @@ class ImageFactory {
        return `
         <article class="media-section">
             <figure>
-                <img src="../assets/images/media/${media.image} ">
+                <img src="../assets/images/media/${media.image}" onclick="displayLightbox()">
                 <figcaption>
                 <section>
                     <h4>${media.title}</h4>
                 </section>
                 <article>
-                    <span>${media.likes} <i class="fas fa-heart btn-like"></i></span>
+                    <span class="media-like">
+                        ${media.likes}
+                        <i class="fas fa-heart" id="like-button-${media.id}" onclick="likeCount()"></i>
+                    </span>
                 </article>
                 </figcaption>
             </figure>
@@ -22,7 +25,7 @@ class ImageFactory {
 class VideoFactory {
     static render(media) {
         return `
-        <article class="media-section">
+        <article class="media-section" onclick="displayLightbox()">
             <figure>
                 <video controls>
                     <source src="../assets/images/media/${media.video}">
@@ -32,7 +35,10 @@ class VideoFactory {
                     <h4>${media.title}</h4>
                 </section>
                 <article>
-                    <span>${media.likes} <i class="fas fa-heart btn-like"></i></span>
+                    <span class="media-like">
+                        ${media.likes} 
+                        <i class="fas fa-heart btn-like" id="like-button-${media.id}" onclick="likeCount()"></i>
+                    </span>
                 </article>
                 </figcaption>
             </figure>
@@ -44,7 +50,6 @@ class VideoFactory {
 
 class MediaFactory {
     static render(media){
-
         if(media.video === undefined){
             return ImageFactory.render(media)
 

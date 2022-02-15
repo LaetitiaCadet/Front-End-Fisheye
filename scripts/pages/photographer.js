@@ -28,26 +28,14 @@ function filterUser(users){
     return filterById
 }
 
-async function lightboxPlayer(){
- const btnPrev = document.querySelector("lightbox_prev");
- const btnNext = document.querySelector("lightbox_next"); 
-
- const mediaFigure = document.querySelectorAll("media-section");
-
- mediaFigure.addEventListener("click", function () {
-    displayLightbox()
-    console.log("click")
- })
-}
-
-lightboxPlayer()
 
 async function dataUser() {
     // je récupère dans ma variable les donnée de mon fichier json dans la fonction getPhotographers
     // qui se trouve dans le fichier index.js 
     const photographer = await getPhotographers()
     const profils = photographer.photographers;
-    return filterUser(profils)   
+    return filterUser(profils)  
+    
 }
 
 async function dataUserMedia() {
@@ -97,11 +85,66 @@ async function dataSortBy(){
         
      })
 }
-
 dataSortBy()
 
+async function likeCount () {
+
+
+}
+
+// en cours de construction ..
+ async function displayBanner () {
+    const photographer = await getPhotographers()
+    const medias = photographer.media;
+    const photographeMedia = medias.filter(media => media.photographerId == id);
+
+    const users = photographer.photographers;
+    const usersProfils = users.filter(user => user.id == id); 
+
+    let arrayLikes = [];
+    let arrayPrice = [];
+
+    const bannerLike = document.querySelector('.sticky-banner');
+    const likeSum = document.createElement('p');
+    const priceItem = document.createElement('p');
+
+    for (items in photographeMedia){
+        arrayLikes.push(photographeMedia[items].likes)
+        console.log(arrayLikes)
+    }
+
+    for (items in usersProfils){
+        arrayPrice.push(usersProfils[items].price)
+    }
+
+    let sum = arrayLikes.reduce(sumFunction);
+
+    function sumFunction (total, value){
+        return total + value
+    }
+    likeSum.innerHTML = sum + ''
+    priceItem.innerHTML = arrayPrice + '€ /jour'
+     
+    bannerLike.appendChild(likeSum)
+    bannerLike.appendChild(priceItem)
+   
+}
+displayBanner()
+
+//en cours de construction ...
 async function lightboxPlayer(){
-    
+    const photographer = await getPhotographers()
+    const medias = photographer.media;
+    const photographeMedia = medias.filter(media => media.photographerId == id)
+    let result = [] ;
+
+    for (image in photographeMedia){
+        result = photographeMedia[image].image
+        console.log(result)   
+    }
+
+    const btnPrev = document.querySelector('lightbox_prev');
+    const btnNext = document.querySelector('lightbox_next');
 }
 
 async function displayProfil(users) {
@@ -119,7 +162,6 @@ async function displayMedia(mediasUser) {
         const userMediaDOM = photographerMediaModel.showMedia(media)
         photographMedias.innerHTML += userMediaDOM;
     })
-
 };
 
 async function init() {

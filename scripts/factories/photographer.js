@@ -5,6 +5,7 @@ function photographerFactory(data) {
     const mediaItems = `assets/images/media/${image}`
     const cityCountry = `${city}, ` + `${country}`;
     const photographerLink = `../../photographer.html?id=${id}`;
+    
 
     function getUserCardDOM() {
         //création de la carte photographe
@@ -77,18 +78,20 @@ function photographerFactory(data) {
     }
 
     function showMedia(media) {
-        let btnLike = document.querySelectorAll('.btn-like')
-        btnLike.forEach((btn) =>{
-            btn.addEventListener('click', function () {
-                console.log('click')
-                likes ++;
-            })
-        });
+            document.addEventListener('click', function (e) {
+                if (e.target.id == `like-button-${media.id}`) {
+                    console.log(likes + 1)      
+                }
+            }) 
+
         const mediaTag = MediaFactory.render(media);
 
 
         return mediaTag;
     }
+
+
+
     return { name,
              picture, 
              city, 
@@ -104,6 +107,6 @@ function photographerFactory(data) {
              date, 
              getUserCardDOM, 
              getUserProfil, 
-             showMedia
+             showMedia,
             }
 }
