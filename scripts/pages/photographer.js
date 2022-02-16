@@ -106,11 +106,11 @@ async function likeCount () {
 
     const bannerLike = document.querySelector('.sticky-banner');
     const likeSum = document.createElement('p');
+    likeSum.setAttribute('id', 'total-likes')
     const priceItem = document.createElement('p');
 
     for (items in photographeMedia){
         arrayLikes.push(photographeMedia[items].likes)
-        console.log(arrayLikes)
     }
 
     for (items in usersProfils){
@@ -136,15 +136,30 @@ async function lightboxPlayer(){
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id)
+    const lightboxImg = document.querySelector('.lightbox_img')
     let result = [] ;
 
     for (image in photographeMedia){
-        result = photographeMedia[image].image
+        result.push(photographeMedia[image].image)
         console.log(result)   
     }
+    
+    const displayImg = document.querySelector('figure img');
+    const newImg =  document.createElement('img');
+    newImg.setAttribute('src', displayImg.src);
+    console.log(newImg)
+    lightboxImg.appendChild(newImg)
+    displayImg.onclick = function(e){
+        displayImg.src = e.currentTarget.src
+    }
 
-    const btnPrev = document.querySelector('lightbox_prev');
-    const btnNext = document.querySelector('lightbox_next');
+    
+
+    function prevImg (){
+        let i = result.findIndex(image => image === result)
+        console.log(i);
+    }
+    prevImg()
 }
 
 async function displayProfil(users) {
@@ -159,7 +174,7 @@ async function displayProfil(users) {
 async function displayMedia(mediasUser) {
     mediasUser.forEach((media) => {
         const photographerMediaModel = photographerFactory(media)
-        const userMediaDOM = photographerMediaModel.showMedia(media)
+        const userMediaDOM = photographerMediaModel.showMedia(media, mediasUser)
         photographMedias.innerHTML += userMediaDOM;
     })
 };

@@ -231,11 +231,24 @@ form input {
       width: 100%;
   }
 
+.lightbox_container header img {
+    margin: 0 20px;
+    fill: #901C1C;
+    stroke:#901C1C;
+    cursor:pointer
+}
 
-/* #lightbox_nav {
+.lightbox_img {
     display: flex;
-    justify-content: space-between;
-} */
+    justify-content: center;
+}
+
+.lightbox_img img {
+    width: 1050px;
+    height: 900px;
+    margin: 20px;
+    object-fit: cover;
+}
 
 
 .lightbox_prev, .lightbox_next {
@@ -246,6 +259,8 @@ form input {
     right: 0;
     height: 100%;
     margin-top: -14px;
+    margin-left: 10px;
+    margin-right:10px;
     z-index: 2;
     cursor: pointer;
 }

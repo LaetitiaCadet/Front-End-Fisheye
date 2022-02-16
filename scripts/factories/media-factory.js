@@ -10,7 +10,7 @@ class ImageFactory {
                     <h4>${media.title}</h4>
                 </section>
                 <article>
-                    <span class="media-like">
+                    <span class="media-like" id="media-${media.id}">
                         ${media.likes}
                         <i class="fas fa-heart" id="like-button-${media.id}" onclick="likeCount()"></i>
                     </span>
@@ -35,7 +35,7 @@ class VideoFactory {
                     <h4>${media.title}</h4>
                 </section>
                 <article>
-                    <span class="media-like">
+                    <span class="media-like" id="media-${media.id}">
                         ${media.likes} 
                         <i class="fas fa-heart btn-like" id="like-button-${media.id}" onclick="likeCount()"></i>
                     </span>

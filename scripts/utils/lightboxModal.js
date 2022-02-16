@@ -1,10 +1,12 @@
-function displayLightbox() {
+function displayLightbox(e) {
     const lightboxModal = document.getElementById("lightbox_modal");
+    lightboxModal.style.display = "block";
     lightboxPlayer()
-	lightboxModal.style.display = "block";
 }
 
 function closeLightbox() {
     const lightboxModal = document.getElementById("lightbox_modal");
-   lightboxModal.style.display = "none";
+    const lightboxImg = document.querySelector('.lightbox_img')
+    lightboxModal.style.display = "none";
+    lightboxImg.innerHTML = "";
 }

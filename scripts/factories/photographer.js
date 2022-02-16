@@ -77,22 +77,32 @@ function photographerFactory(data) {
 
     }
 
-    function showMedia(media) {
-            document.addEventListener('click', function (e) {
-                if (e.target.id == `like-button-${media.id}`) {
-                    console.log(likes + 1)      
-                }
-            }) 
+    function showMedia(medium, media) {
+        let totalLikes = 0
+        for (const medium of media){
+            totalLikes += medium.likes
+        }
+        document.addEventListener('click', function (e) {
+            if (e.target.id == `like-button-${medium.id}`) {
+                e.target.parentElement.innerHTML = `
+                  ${likes + 1} <i class="fas fa-heart" id="like-button-${medium.id}" onclick="likeCount()"></i>
+                `
+                totalLikes += 1
+                renderTotalLikes(totalLikes)
 
-        const mediaTag = MediaFactory.render(media);
-
-
+            }
+        }) 
+        const mediaTag = MediaFactory.render(medium);
         return mediaTag;
     }
 
+    function renderTotalLikes(likes) {
+        const totalLikes = document.getElementById('total-likes')
+        totalLikes.innerHTML = `${likes}`
+    }
 
-
-    return { name,
+    return { 
+             name,
              picture, 
              city, 
              country, 
