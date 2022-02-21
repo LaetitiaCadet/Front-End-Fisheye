@@ -7,13 +7,13 @@ a, a:visited, a:hover, a:active {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
+    padding-top: 60px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color:whitesmoke;
+    background-color:rgba(196, 196, 196, 0.4);
 }
 
 .photograph-header {
@@ -74,9 +74,9 @@ a, a:visited, a:hover, a:active {
 }
 
 .modal header h2 {
-    font-size: 64px;
+    font-size: 50px;
     font-weight: normal;
-    text-align: center;
+    text-align: inherit;
 }
 
 form {
@@ -84,6 +84,8 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    margin-top:15px;
+
 }
 
 form label {
@@ -207,18 +209,17 @@ form input {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color:whitesmoke;
+    background-color:rgba(196, 196, 196, 0.9);
+    transition-duration: 3s;
 }
 
 .lightbox_container {
     position: relative;
-    border: 1px solid #901C1C;
     margin: auto;
     padding: 0;
     width: 90%;
@@ -233,21 +234,21 @@ form input {
 
 .lightbox_container header img {
     margin: 0 20px;
-    fill: #901C1C;
-    stroke:#901C1C;
-    cursor:pointer
+    filter: invert(89%) sepia(62%) saturate(3525%) hue-rotate(350deg) brightness(110%) contrast(89%);
+    cursor:pointer;
+    z-index: 3
 }
 
-.lightbox_img {
+#lightbox_img_container {
     display: flex;
     justify-content: center;
 }
 
-.lightbox_img img {
-    width: 1050px;
-    height: 900px;
+#lightbox_img_container img {
+    width: 80%;
     margin: 20px;
     object-fit: cover;
+    transition-duration: 2s;
 }
 
 
@@ -258,7 +259,7 @@ form input {
     top: 0;
     right: 0;
     height: 100%;
-    margin-top: -14px;
+    margin-top: 50px;
     margin-left: 10px;
     margin-right:10px;
     z-index: 2;

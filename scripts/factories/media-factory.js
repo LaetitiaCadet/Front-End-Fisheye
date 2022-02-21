@@ -4,7 +4,7 @@ class ImageFactory {
        return `
         <article class="media-section">
             <figure>
-                <img src="../assets/images/media/${media.image}" onclick="displayLightbox()">
+                <img src="../assets/images/media/${media.image}" id="media-image-${media.id}" onclick="displayLightbox()">
                 <figcaption>
                 <section>
                     <h4>${media.title}</h4>
@@ -12,7 +12,7 @@ class ImageFactory {
                 <article>
                     <span class="media-like" id="media-${media.id}">
                         ${media.likes}
-                        <i class="fas fa-heart" id="like-button-${media.id}" onclick="likeCount()"></i>
+                        <i class="fas fa-heart" id="like-button-${media.id}"></i>
                     </span>
                 </article>
                 </figcaption>
@@ -37,7 +37,7 @@ class VideoFactory {
                 <article>
                     <span class="media-like" id="media-${media.id}">
                         ${media.likes} 
-                        <i class="fas fa-heart btn-like" id="like-button-${media.id}" onclick="likeCount()"></i>
+                        <i class="fas fa-heart btn-like" id="like-button-${media.id}"></i>
                     </span>
                 </article>
                 </figcaption>

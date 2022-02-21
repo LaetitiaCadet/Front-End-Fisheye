@@ -87,10 +87,63 @@ async function dataSortBy(){
 }
 dataSortBy()
 
-async function likeCount () {
+async function displayLightbox() {
+    const photographer = await getPhotographers()
+    const medias = photographer.media;
+    const photographeMedia = medias.filter(media => media.photographerId == id)
+    const arrayImg = []
 
+    const lightboxModal = document.getElementById("lightbox_modal");
+    const closeLightbox = document.getElementById("close_lightbox");
+    const containerImg = document.getElementById('lightbox_img_container')
+    const mediaImages = document.querySelectorAll('figure img');
+    const btnPrev = document.querySelector('.lightbox_prev');
+    const btnNext = document.querySelector('.lightbox_next');
+    const lightboxImg = document.createElement('img');
+    let position = 0;
+
+
+    mediaImages.forEach(image => {
+        image.addEventListener('click',  function(e){ 
+            lightboxModal.style.display = 'block'
+            lightboxImg.id = "lightbox-img" 
+            lightboxImg.src = e.currentTarget.src;
+            containerImg.innerHTML = ""
+            containerImg.appendChild(lightboxImg);
+        })
+
+    })
+
+    for (let i = 0; i < mediaImages.length; i++){
+        arrayImg.push(mediaImages[i])
+    }
+
+    let currentSlideIndex = -1;
+
+    btnNext.addEventListener('click', function (){
+        currentSlideIndex ++;
+
+        if(currentSlideIndex > arrayImg.length ){
+            currentSlideIndex = 0     
+        }
+        lightboxImg.src = arrayImg[currentSlideIndex].src ; 
+    })
+
+    btnPrev.addEventListener('click', function (){
+        currentSlideIndex --;
+
+       if(currentSlideIndex > arrayImg.length ){
+          currentSlideIndex = -1    
+        }
+        lightboxImg.src = arrayImg[currentSlideIndex].src ; 
+    })
+
+    closeLightbox.addEventListener('click', function () {
+        lightboxModal.style.display = 'none'
+    })
 
 }
+
 
 // en cours de construction ..
  async function displayBanner () {
@@ -130,37 +183,6 @@ async function likeCount () {
    
 }
 displayBanner()
-
-//en cours de construction ...
-async function lightboxPlayer(){
-    const photographer = await getPhotographers()
-    const medias = photographer.media;
-    const photographeMedia = medias.filter(media => media.photographerId == id)
-    const lightboxImg = document.querySelector('.lightbox_img')
-    let result = [] ;
-
-    for (image in photographeMedia){
-        result.push(photographeMedia[image].image)
-        console.log(result)   
-    }
-    
-    const displayImg = document.querySelector('figure img');
-    const newImg =  document.createElement('img');
-    newImg.setAttribute('src', displayImg.src);
-    console.log(newImg)
-    lightboxImg.appendChild(newImg)
-    displayImg.onclick = function(e){
-        displayImg.src = e.currentTarget.src
-    }
-
-    
-
-    function prevImg (){
-        let i = result.findIndex(image => image === result)
-        console.log(i);
-    }
-    prevImg()
-}
 
 async function displayProfil(users) {
     users.forEach((users) => {

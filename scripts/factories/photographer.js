@@ -51,6 +51,8 @@ function photographerFactory(data) {
         const modal = document.querySelector('.contact_button')
         const infoProfil = document.createElement('article');
         const photoProfil = document.createElement('article');
+        const nameModal = document.getElementById('photographer-name')
+        nameModal.textContent = name
 
         const img = document.createElement('img');
         img.setAttribute('src', picture);
@@ -80,15 +82,16 @@ function photographerFactory(data) {
     function showMedia(medium, media) {
         let totalLikes = 0
         for (const medium of media){
-            totalLikes += medium.likes
+            totalLikes =+ medium.likes
         }
+
         document.addEventListener('click', function (e) {
             if (e.target.id == `like-button-${medium.id}`) {
                 e.target.parentElement.innerHTML = `
-                  ${likes + 1} <i class="fas fa-heart" id="like-button-${medium.id}" onclick="likeCount()"></i>
+                  ${likes + 1} <i class="fas fa-heart" id="like-button-${medium.id}"></i>
                 `
                 totalLikes += 1
-                renderTotalLikes(totalLikes)
+                renderTotalLikes(totalLikes + '<i class="fas fa-heart 2x"></i>')
 
             }
         }) 
@@ -118,5 +121,6 @@ function photographerFactory(data) {
              getUserCardDOM, 
              getUserProfil, 
              showMedia,
+             displayLightbox
             }
 }

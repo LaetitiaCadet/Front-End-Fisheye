@@ -11,12 +11,12 @@
   <body>
     <header>
       <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo" />
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
       </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
       </div>
       <div class="photograph-dropdown">
         <form class="form">
@@ -32,14 +32,54 @@
     <div id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <h2>Contactez-moi<br><span id="photographer-name"></span></h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Close Contact form" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+				<form name="contact" method="get" action="photographer.html"
+        onsubmit="return validate(event)">
+          <div
+            class="formData">
+            <label for="first">Prénom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="first"
+              name="first"
+              minlength="2"
+            />
+            <span id="prenom-error"></span>
+          </div>
+          <div
+            class="formData">
+            <label for="last">Nom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              minlength="2"
+            />
+            <span id="nom-error"></span>
+          </div>
+          <div
+            class="formData">
+            <label for="email">E-mail</label>
+            <input
+              class="text-control"
+              type="email"
+              id="email"
+              name="email"
+            />
+            <span id="email-error"></span>
+          </div>
+          <div
+            class="formData">
+            <label for="textarea">Votre message</label>
+            <textarea id="textarea" name="textarea" rows="4" cols="50">
+              
+            </textarea>
+            <span id="textarea-error"></span>
+          </div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
@@ -50,13 +90,13 @@
     <div id="lightbox_modal">
       <div class="lightbox_container">
         <header>
-          <img src="assets/icons/close.svg" onclick="closeLightbox()" />
+          <img src="assets/icons/close.svg" id="close_lightbox" aria-label="image closeup view" />
         </header>
         <div id="lightbox_nav">
-          <button class="lightbox_prev" onclick="prevImg()"><i class="fa-solid fa-chevron-left fa-3x"></i></button>
+          <button class="lightbox_prev"><i class="fa-solid fa-chevron-left fa-3x"></i></button>
           <button class="lightbox_next"><i class="fa-solid fa-chevron-right fa-3x"></i></button>
         </div>
-        <div class="lightbox_img">
+        <div id="lightbox_img_container">
 
         </div>
       </div>
