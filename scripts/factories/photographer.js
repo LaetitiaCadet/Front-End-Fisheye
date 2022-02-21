@@ -82,13 +82,14 @@ function photographerFactory(data) {
     function showMedia(medium, media) {
         let totalLikes = 0
         for (const medium of media){
-            totalLikes =+ medium.likes
+            totalLikes += medium.likes
         }
 
         document.addEventListener('click', function (e) {
+            let numLike = likes;
             if (e.target.id == `like-button-${medium.id}`) {
                 e.target.parentElement.innerHTML = `
-                  ${likes + 1} <i class="fas fa-heart" id="like-button-${medium.id}"></i>
+                  ${numLike ++} <i class="fas fa-heart" id="like-button-${medium.id}"></i>
                 `
                 totalLikes += 1
                 renderTotalLikes(totalLikes + '<i class="fas fa-heart 2x"></i>')

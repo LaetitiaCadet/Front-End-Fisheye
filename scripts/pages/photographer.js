@@ -133,13 +133,14 @@ async function displayLightbox() {
         currentSlideIndex --;
 
        if(currentSlideIndex > arrayImg.length ){
-          currentSlideIndex = -1    
+          currentSlideIndex = 0 
         }
         lightboxImg.src = arrayImg[currentSlideIndex].src ; 
     })
 
     closeLightbox.addEventListener('click', function () {
         lightboxModal.style.display = 'none'
+        containerImg.innerHTML = ""
     })
 
 }
