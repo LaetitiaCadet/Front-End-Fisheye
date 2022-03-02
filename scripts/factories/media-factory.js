@@ -4,7 +4,7 @@ class ImageFactory {
        return `
         <article class="media-section">
             <figure>
-                <img src="../assets/images/media/${media.image}" id="media-image-${media.id}" onclick="displayLightbox()">
+                <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" onclick="displayLightbox(event)">
                 <figcaption>
                 <section>
                     <h4>${media.title}</h4>
@@ -25,10 +25,10 @@ class ImageFactory {
 class VideoFactory {
     static render(media) {
         return `
-        <article class="media-section" onclick="displayLightbox()">
+        <article class="media-section" onclick="displayLightbox(event)">
             <figure>
                 <video controls>
-                    <source src="../assets/images/media/${media.video}">
+                    <source class="photographer-media" src="../assets/images/media/${media.video}">
                 </video>
                 <figcaption>
                 <section>

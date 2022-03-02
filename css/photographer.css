@@ -80,6 +80,7 @@ a, a:visited, a:hover, a:active {
 }
 
 form {
+    font-family: "DM Sans", sans-serif;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -99,6 +100,7 @@ form div {
     width: 100%;
     align-items: self-start;
     margin-bottom: 26px;
+    line-height: 1.5;
 }
 
 form input {
@@ -106,7 +108,20 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size:16px;
+    line-height: 1.5;
 }
+
+form textarea {
+    font-family: "DM Sans", sans-serif;
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    box-shadow: 1px 1px 1px #999;
+    font-size:16px;
+}
+
+
 
 .photograph-medias {
     display:flex;
@@ -239,16 +254,21 @@ form input {
     z-index: 3
 }
 
-#lightbox_img_container {
+#lightbox_media_container {
     display: flex;
     justify-content: center;
 }
 
-#lightbox_img_container img {
+#lightbox_media_container img {
     width: 80%;
     margin: 20px;
     object-fit: cover;
     transition-duration: 2s;
+}
+
+#lightbox_media_container video {
+    width: 80%;
+    margin:20px;
 }
 
 

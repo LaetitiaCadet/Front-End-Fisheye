@@ -14,11 +14,6 @@ main.appendChild(photographDropdown);
 photographMedias.classList.add('photograph-medias');
 photographDropdown.classList.add('photograph-dropdown');
 
-//je stylise ma balise select et ses option en utilisant du js car ces dernières selon les user-agent ne sont pas les mêmes 
-let optionCategories = document.querySelector('option');
-
-optionCategories.style.borderBottom = "2px solid white";
-optionCategories.style.padding = "50px"
 
 function filterUser(users){
     //je récupère le profil du photographe en utilisant la fonction filter qui me permet de comparer si
@@ -87,60 +82,118 @@ async function dataSortBy(){
 }
 dataSortBy()
 
-async function displayLightbox() {
+
+async function displayLightbox(event) {
+
+
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id)
-    const arrayImg = []
+    console.log(photographeMedia)
 
     const lightboxModal = document.getElementById("lightbox_modal");
     const closeLightbox = document.getElementById("close_lightbox");
-    const containerImg = document.getElementById('lightbox_img_container')
-    const mediaImages = document.querySelectorAll('figure img');
+    const containerMedia = document.getElementById('lightbox_media_container')
+    const photographerMediaTag = document.querySelectorAll('.photographer-media');
     const btnPrev = document.querySelector('.lightbox_prev');
     const btnNext = document.querySelector('.lightbox_next');
     const lightboxImg = document.createElement('img');
-    let position = 0;
+    const lightboxVideo = document.createElement('video')
+    const mediaTitleArray = Array.from(photographeMedia).map(media => media.title)
+    let arrayResult = [];
+    let newArray = []
 
-
-    mediaImages.forEach(image => {
-        image.addEventListener('click',  function(e){ 
-            lightboxModal.style.display = 'block'
-            lightboxImg.id = "lightbox-img" 
-            lightboxImg.src = e.currentTarget.src;
-            containerImg.innerHTML = ""
-            containerImg.appendChild(lightboxImg);
-        })
-
-    })
-
-    for (let i = 0; i < mediaImages.length; i++){
-        arrayImg.push(mediaImages[i])
+    for (const items in photographeMedia){
+        if ( typeof photographeMedia[items].image == "undefined"){
+            console.log(photographeMedia[items].video)
+            arrayResult.push(photographeMedia[items].video)
+        } else {
+            newArray.push(photographeMedia[items].image)
+        }
     }
 
-    let currentSlideIndex = -1;
+    let mediaArray = arrayResult.concat(newArray);
+
+
+    const mediaURLArray2 = Array.from(mediaArray).map(media => media.src)
+
+    const mediaURLArray = Array.from(photographerMediaTag).map(media => media.src)
+    console.log(mediaURLArray)
+    let source = event.target.src == "" ? event.target.children[0].src : event.target.src;
+    let mediaIdx = mediaURLArray.indexOf(source)
+
+    console.log(mediaIdx)
+    
+
+    photographerMediaTag.forEach(media => {
+        media.addEventListener('click',  function(e){ 
+            e.preventDefault()
+            let mediaType = media.src
+            console.log(mediaType)
+            if (mediaType.split('.').pop() == 'jpg'){
+                lightboxModal.style.display = 'block'
+                lightboxImg.id = "lightbox-img" 
+                lightboxImg.src = e.currentTarget.src;
+                containerMedia.innerHTML = ""
+                containerMedia.appendChild(lightboxImg);
+            } else {
+                console.log("c'est une video")
+                lightboxVideo.src = e.currentTarget.src
+                containerMedia.innerHTML = ""
+                containerMedia.appendChild(lightboxVideo)
+            }
+        })
+    })
+
+    let currentSlideIndex = mediaIdx;
 
     btnNext.addEventListener('click', function (){
         currentSlideIndex ++;
 
-        if(currentSlideIndex > arrayImg.length ){
+        if(currentSlideIndex > mediaURLArray.length ){
             currentSlideIndex = 0     
         }
-        lightboxImg.src = arrayImg[currentSlideIndex].src ; 
+        let media = mediaURLArray[currentSlideIndex]
+        if (media.split('.').pop() == 'mp4') {
+            containerMedia.innerHTML = `
+              <video controls>
+                    <source src="${media}" class="photographer-media">
+              </video>
+              <br> 
+              <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>
+            `
+        } else {
+            containerMedia.innerHTML = `<img id="lightbox-img" src="${media}"> 
+                                      <br> 
+                                      <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>`
+        }
     })
 
     btnPrev.addEventListener('click', function (){
         currentSlideIndex --;
 
-       if(currentSlideIndex > arrayImg.length ){
-          currentSlideIndex = 0 
+       if(currentSlideIndex <  0 ){
+          currentSlideIndex = mediaURLArray.length - 1
         }
-        lightboxImg.src = arrayImg[currentSlideIndex].src ; 
+        let media = mediaURLArray[currentSlideIndex]
+        if (media.split('.').pop() == 'mp4') {
+            containerMedia.innerHTML = `
+              <video controls>
+                    <source src="${media}" class="photographer-media">
+                </video>
+                <h4 class="lightbox-title">${title}</h4>
+            `
+        } else {
+            containerMedia.innerHTML = `
+            <img id="lightbox-img" src="${media}"> 
+                <br> 
+                <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>`
+        }
     })
 
     closeLightbox.addEventListener('click', function () {
         lightboxModal.style.display = 'none'
-        containerImg.innerHTML = ""
+        containerMedia.innerHTML = ""
     })
 
 }
