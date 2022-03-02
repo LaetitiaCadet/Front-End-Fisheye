@@ -147,7 +147,8 @@ async function displayLightbox(event) {
 
     let currentSlideIndex = mediaIdx;
 
-    btnNext.addEventListener('click', function (){
+    btnNext.addEventListener('click', function (e){
+        e.preventDefault()
         currentSlideIndex ++;
 
         if(currentSlideIndex > mediaURLArray.length ){
@@ -169,7 +170,8 @@ async function displayLightbox(event) {
         }
     })
 
-    btnPrev.addEventListener('click', function (){
+    btnPrev.addEventListener('click', function (e){
+        e.preventDefault()
         currentSlideIndex --;
 
        if(currentSlideIndex <  0 ){

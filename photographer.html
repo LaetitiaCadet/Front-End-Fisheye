@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
       </div>
       <div class="photograph-dropdown">
         <form class="form">
-          <p>Trier par</p>
+          <label for="dropdown">Trier par</label>
           <select size="1" name="categorie" id="dropdown">
               <option value='popularity'>Popularité</option>
               <option value='date'>Date</option>
@@ -89,12 +89,12 @@
     </div>
     <div id="lightbox_modal">
       <div class="lightbox_container">
-        <header>
+        <header role="banner">
           <img src="assets/icons/close.svg" id="close_lightbox" aria-label="image closeup view" />
         </header>
         <div id="lightbox_nav">
-          <button class="lightbox_prev"><i class="fa-solid fa-chevron-left fa-3x"></i></button>
-          <button class="lightbox_next"><i class="fa-solid fa-chevron-right fa-3x"></i></button>
+          <a class="lightbox_prev" alt="previous image"><i class="fa-solid fa-chevron-left fa-3x"></i></a >
+          <a class="lightbox_next" alt="next image"><i class="fa-solid fa-chevron-right fa-3x"></i></a >
         </div>
         <div id="lightbox_media_container">
 

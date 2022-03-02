@@ -154,7 +154,8 @@ form textarea {
     font-size: 20px;
 }
 
-.media-section figcaption h4 {
+.media-section figcaption h1 {
+    margin-right:0;
     font-weight: 400;
 }
 
@@ -172,8 +173,11 @@ form textarea {
     align-items: center;
 }
 
-.photograph-dropdown form p {
+.photograph-dropdown form label {
     margin-right: 20px;
+    font-size: 20px;
+    font-weight: 700;
+
 }
 
 .photograph-dropdown form select{
@@ -257,20 +261,24 @@ form textarea {
 #lightbox_media_container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 #lightbox_media_container img {
     width: 80%;
-    margin: 20px;
+    margin: 0 auto;
     object-fit: cover;
     transition-duration: 2s;
 }
 
 #lightbox_media_container video {
     width: 80%;
-    margin:20px;
+    margin: 0 auto;
 }
 
+.lightbox-title {
+    margin-left:100px
+}
 
 .lightbox_prev, .lightbox_next {
     border:none; 

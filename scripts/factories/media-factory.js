@@ -2,17 +2,17 @@
 class ImageFactory {
     static render(media) {
        return `
-        <article class="media-section">
+        <article class="media-section" onclick="displayLightbox(event)">
             <figure>
-                <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" onclick="displayLightbox(event)">
+                <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" alt="${media.title}">
                 <figcaption>
                 <section>
-                    <h4>${media.title}</h4>
+                    <h1>${media.title}</h1>
                 </section>
                 <article>
                     <span class="media-like" id="media-${media.id}">
                         ${media.likes}
-                        <i class="fas fa-heart" id="like-button-${media.id}"></i>
+                        <i class="fas fa-heart" id="like-button-${media.id}" aria-disabled="true"></i>
                     </span>
                 </article>
                 </figcaption>
@@ -27,17 +27,17 @@ class VideoFactory {
         return `
         <article class="media-section" onclick="displayLightbox(event)">
             <figure>
-                <video controls>
-                    <source class="photographer-media" src="../assets/images/media/${media.video}">
+                <video controls >
+                    <source class="photographer-media" src="../assets/images/media/${media.video}" type="video/mp4" alt="${media.title}">
                 </video>
                 <figcaption>
                 <section>
-                    <h4>${media.title}</h4>
+                    <h1>${media.title}</h1> 
                 </section>
                 <article>
                     <span class="media-like" id="media-${media.id}">
                         ${media.likes} 
-                        <i class="fas fa-heart btn-like" id="like-button-${media.id}"></i>
+                        <i class="fas fa-heart btn-like" id="like-button-${media.id}" aria-disabled="true"></i>
                     </span>
                 </article>
                 </figcaption>

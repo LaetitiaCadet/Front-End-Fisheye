@@ -58,6 +58,7 @@ function photographerFactory(data) {
         const img = document.createElement('img');
         img.setAttribute('src', picture);
         img.classList.add("profil-photo");
+        img.setAttribute('alt', name + ' photo profil')
 
         const h2 = document.createElement('h2');
         h2.textContent = name;
