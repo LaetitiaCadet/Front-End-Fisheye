@@ -161,12 +161,12 @@ async function displayLightbox(event) {
                     <source src="${media}" class="photographer-media">
               </video>
               <br> 
-              <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>
+              <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>
             `
         } else {
             containerMedia.innerHTML = `<img id="lightbox-img" src="${media}"> 
                                       <br> 
-                                      <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>`
+                                      <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
     })
 
@@ -183,13 +183,13 @@ async function displayLightbox(event) {
               <video controls>
                     <source src="${media}" class="photographer-media">
                 </video>
-                <h4 class="lightbox-title">${title}</h4>
+                <h1 class="lightbox-title">${title}</h1>
             `
         } else {
             containerMedia.innerHTML = `
             <img id="lightbox-img" src="${media}"> 
                 <br> 
-                <h4 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h4>`
+                <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
     })
 

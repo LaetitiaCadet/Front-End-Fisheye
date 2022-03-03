@@ -277,7 +277,8 @@ form textarea {
 }
 
 .lightbox-title {
-    margin-left:100px
+    margin-left:100px;
+    font-weight: 700
 }
 
 .lightbox_prev, .lightbox_next {
@@ -297,11 +298,13 @@ form textarea {
 .lightbox_prev {
     right: auto;
     left: 0 ;
+    top:40%
 }
 
 .lightbox_next {
     left: auto;
     right: 0 ;
+    top:40%;
 }
 
 .fa-chevron-left, .fa-chevron-right {

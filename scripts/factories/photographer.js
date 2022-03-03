@@ -91,7 +91,7 @@ function photographerFactory(data) {
             let numLike = likes;
             if (e.target.id == `like-button-${medium.id}`) {
                 e.target.parentElement.innerHTML = `
-                  ${numLike ++} <i class="fas fa-heart" id="like-button-${medium.id}"></i>
+                  ${numLike += 1} <i class="fas fa-heart 2x" id="like-button-${medium.id}"></i>
                 `
                 totalLikes += 1
                 renderTotalLikes(totalLikes + '<i class="fas fa-heart 2x"></i>')
