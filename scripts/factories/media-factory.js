@@ -12,7 +12,7 @@ class ImageFactory {
                 <article>
                     <span class="media-like" id="media-${media.id}">
                         ${media.likes}
-                        <i class="fas fa-heart" id="like-button-${media.id}" aria-disabled="true"></i>
+                        <i class="fas fa-heart btn-like" id="like-button-${media.id}" aria-disabled="true"></i>
                     </span>
                 </article>
                 </figcaption>

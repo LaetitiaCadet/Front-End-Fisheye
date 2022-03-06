@@ -105,7 +105,6 @@ async function displayLightbox(event) {
 
     for (const items in photographeMedia){
         if ( typeof photographeMedia[items].image == "undefined"){
-            console.log(photographeMedia[items].video)
             arrayResult.push(photographeMedia[items].video)
         } else {
             newArray.push(photographeMedia[items].image)
@@ -118,11 +117,10 @@ async function displayLightbox(event) {
     const mediaURLArray2 = Array.from(mediaArray).map(media => media.src)
 
     const mediaURLArray = Array.from(photographerMediaTag).map(media => media.src)
-    console.log(mediaURLArray)
+    
     let source = event.target.src == "" ? event.target.children[0].src : event.target.src;
     let mediaIdx = mediaURLArray.indexOf(source)
 
-    console.log(mediaIdx)
     
 
     photographerMediaTag.forEach(media => {
@@ -137,7 +135,6 @@ async function displayLightbox(event) {
                 containerMedia.innerHTML = ""
                 containerMedia.appendChild(lightboxImg);
             } else {
-                console.log("c'est une video")
                 lightboxVideo.src = e.currentTarget.src
                 containerMedia.innerHTML = ""
                 containerMedia.appendChild(lightboxVideo)
@@ -214,6 +211,7 @@ async function displayLightbox(event) {
     let arrayPrice = [];
 
     const bannerLike = document.querySelector('.sticky-banner');
+    const btnLikes = document.querySelectorAll('.btn-like');
     const likeSum = document.createElement('p');
     likeSum.setAttribute('id', 'total-likes')
     const priceItem = document.createElement('p');
@@ -221,6 +219,7 @@ async function displayLightbox(event) {
     for (items in photographeMedia){
         arrayLikes.push(photographeMedia[items].likes)
     }
+    console.log(arrayLikes)
 
     for (items in usersProfils){
         arrayPrice.push(usersProfils[items].price)
@@ -228,17 +227,27 @@ async function displayLightbox(event) {
 
     let sum = arrayLikes.reduce(sumFunction);
 
-    function sumFunction (total, value){
+    function sumFunction (total, value) {
         return total + value
     }
-    likeSum.innerHTML = sum + ''
+
+    likeSum.innerHTML = sum + ` <i  class="fas fa-heart"></i>`  + ''
     priceItem.innerHTML = arrayPrice + '€ /jour'
-     
+
     bannerLike.appendChild(likeSum)
     bannerLike.appendChild(priceItem)
-   
+
+    btnLikes.forEach(like => {
+        like.addEventListener('click', function () {
+            sum += 1
+            console.log(sum)
+            likeSum.innerHTML = sum + '<i class="fas fa-heart 2x"></i>' + ''
+        })
+    })
+    
 }
-displayBanner()
+
+
 
 async function displayProfil(users) {
     users.forEach((users) => {
@@ -263,6 +272,8 @@ async function init() {
     const medias = await dataUserMedia();
     displayProfil(users);
     displayMedia(medias);
+    displayBanner()
+    
 };
 
 init()

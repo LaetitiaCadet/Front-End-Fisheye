@@ -81,11 +81,7 @@ function photographerFactory(data) {
 
     }
 
-    function showMedia(medium, media) {
-        let totalLikes = 0
-        for (const medium of media){
-            totalLikes += medium.likes
-        }
+    function showMedia(medium) {
 
         document.addEventListener('click', function (e) {
             let numLike = likes;
@@ -93,18 +89,10 @@ function photographerFactory(data) {
                 e.target.parentElement.innerHTML = `
                   ${numLike += 1} <i class="fas fa-heart 2x" id="like-button-${medium.id}"></i>
                 `
-                totalLikes += 1
-                renderTotalLikes(totalLikes + '<i class="fas fa-heart 2x"></i>')
-
             }
         }) 
         const mediaTag = MediaFactory.render(medium);
         return mediaTag;
-    }
-
-    function renderTotalLikes(likes) {
-        const totalLikes = document.getElementById('total-likes')
-        totalLikes.innerHTML = `${likes}`
     }
 
     return { 
