@@ -84,7 +84,7 @@ dataSortBy()
 
 
 async function displayLightbox(event) {
-
+    event.preventDefault()
 
     const photographer = await getPhotographers()
     const medias = photographer.media;
@@ -98,7 +98,8 @@ async function displayLightbox(event) {
     const btnPrev = document.querySelector('.lightbox_prev');
     const btnNext = document.querySelector('.lightbox_next');
     const lightboxImg = document.createElement('img');
-    const lightboxVideo = document.createElement('video')
+    const lightboxVideo = document.createElement('video');
+    const sourceVideo = document.createElement('source');
     const mediaTitleArray = Array.from(photographeMedia).map(media => media.title)
     let arrayResult = [];
     let newArray = []
@@ -124,7 +125,8 @@ async function displayLightbox(event) {
     
 
     photographerMediaTag.forEach(media => {
-        media.addEventListener('click',  function(e){ 
+        media.onclick = function (e) {
+            //création de ma lightbox en récupérant la source de mes média image et video et en les 
             e.preventDefault()
             let mediaType = media.src
             console.log(mediaType)
@@ -134,12 +136,16 @@ async function displayLightbox(event) {
                 lightboxImg.src = e.currentTarget.src;
                 containerMedia.innerHTML = ""
                 containerMedia.appendChild(lightboxImg);
-            } else {
-                lightboxVideo.src = e.currentTarget.src
+            }
+            
+            if(mediaType.split('.').pop() == 'mp4'){
+                console.log('une video')
+                sourceVideo.src = e.currentTarget.src
+                lightboxVideo.appendChild(sourceVideo);
                 containerMedia.innerHTML = ""
                 containerMedia.appendChild(lightboxVideo)
             }
-        })
+        }
     })
 
     let currentSlideIndex = mediaIdx;
@@ -180,7 +186,7 @@ async function displayLightbox(event) {
               <video controls>
                     <source src="${media}" class="photographer-media">
                 </video>
-                <h1 class="lightbox-title">${title}</h1>
+                <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>
             `
         } else {
             containerMedia.innerHTML = `

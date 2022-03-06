@@ -2,7 +2,8 @@
 class ImageFactory {
     static render(media) {
        return `
-        <article class="media-section" onclick="displayLightbox(event)">
+       <a href="#" onclick="displayLightbox(event)" >
+        <article class="media-section" ">
             <figure>
                 <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" alt="${media.title}">
                 <figcaption>
@@ -18,31 +19,37 @@ class ImageFactory {
                 </figcaption>
             </figure>
         </article>
-       ` 
+       </a>
+       `
+
     }
 }
 
 class VideoFactory {
     static render(media) {
         return `
-        <article class="media-section" onclick="displayLightbox(event)">
-            <figure>
-                <video controls >
-                    <source class="photographer-media" src="../assets/images/media/${media.video}" type="video/mp4" alt="${media.title}">
-                </video>
-                <figcaption>
-                <section>
-                    <h1>${media.title}</h1> 
-                </section>
-                <article>
-                    <span class="media-like" id="media-${media.id}">
-                        ${media.likes} 
-                        <i class="fas fa-heart btn-like" id="like-button-${media.id}" aria-disabled="true"></i>
-                    </span>
-                </article>
-                </figcaption>
-            </figure>
-        </article>
+         <a href="#" onclick="displayLightbox(event)" role="button" aria-pressed="false">
+            <article class="media-section">
+                <figure>
+                    <video controls >
+                        <source class="photographer-media" src="../assets/images/media/${media.video}" type="video/mp4" alt="${media.title}">
+                        <track label="French srclang="fr" src="../assets/images/media/${media.title}">
+                        Sorry, your browser doesn't support embedded video.
+                    </video>
+                    <figcaption>
+                    <section>
+                        <h1>${media.title}</h1> 
+                    </section>
+                    <article>
+                        <span class="media-like" id="media-${media.id}">
+                            ${media.likes} 
+                            <i class="fas fa-heart btn-like" id="like-button-${media.id}" aria-disabled="true"></i>
+                        </span>
+                    </article>
+                    </figcaption>
+                </figure>
+            </article>
+          </a>  
         ` 
     }
 }
