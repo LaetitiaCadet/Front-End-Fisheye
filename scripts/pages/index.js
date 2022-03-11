@@ -7,7 +7,8 @@
             const photographers = await response.json()
         // et bien retourner le tableau photographers seulement une fois
         //Je retourne le tableau d'objet en un format JSon
-            return photographers   
+            return photographers 
+
         } catch(err) {
             alert(err)
         }

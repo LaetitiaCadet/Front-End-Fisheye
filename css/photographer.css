@@ -157,6 +157,10 @@ form textarea {
 .media-section figcaption h1 {
     margin-right:0;
     font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 270px;
 }
 
 .media-section figcaption article {

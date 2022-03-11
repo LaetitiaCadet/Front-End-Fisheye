@@ -1,6 +1,7 @@
 //Mettre le code JavaScript lié à la page photographer.html
-//avec URLSearchParams je 
+//avec URLSearchParams je cherche l'id dans mon lien 
 let params = new URLSearchParams(document.location.search);
+//Et je récupère l'id avec la fonction get 
 let id = params.get("id"); // 
 
 const photographHeader = document.querySelector(".photograph-header");
@@ -43,6 +44,7 @@ async function dataUserMedia() {
 }
 
 async function dataSortBy(){
+
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id)
@@ -89,7 +91,6 @@ async function displayLightbox(event) {
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id)
-    console.log(photographeMedia)
 
     const lightboxModal = document.getElementById("lightbox_modal");
     const closeLightbox = document.getElementById("close_lightbox");
@@ -101,32 +102,32 @@ async function displayLightbox(event) {
     const lightboxVideo = document.createElement('video');
     const sourceVideo = document.createElement('source');
     const mediaTitleArray = Array.from(photographeMedia).map(media => media.title)
-    let arrayResult = [];
-    let newArray = []
-
-    for (const items in photographeMedia){
-        if ( typeof photographeMedia[items].image == "undefined"){
-            arrayResult.push(photographeMedia[items].video)
-        } else {
-            newArray.push(photographeMedia[items].image)
-        }
-    }
-
-    let mediaArray = arrayResult.concat(newArray);
-
-
-    const mediaURLArray2 = Array.from(mediaArray).map(media => media.src)
-
     const mediaURLArray = Array.from(photographerMediaTag).map(media => media.src)
     
     let source = event.target.src == "" ? event.target.children[0].src : event.target.src;
     let mediaIdx = mediaURLArray.indexOf(source)
 
-    
+    //LigthBox
+
+    document.onclick =  function(e) {
+        console.log(e.target.children[0].src)
+        // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
+        // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
+        if (e.target.children[0].src.split('.').pop() == 'mp4') {
+            const src = e.target.children[0].src
+            console.log(e.target.children[0].src);
+            lightboxModal.style.display = 'block'
+            sourceVideo.src = src
+            lightboxVideo.setAttribute('controls', 'true');
+            lightboxVideo.appendChild(sourceVideo);
+            containerMedia.innerHTML = ""
+            containerMedia.appendChild(lightboxVideo)
+        }
+    }
 
     photographerMediaTag.forEach(media => {
         media.onclick = function (e) {
-            //création de ma lightbox en récupérant la source de mes média image et video et en les 
+            //création de ma lightbox en récupérant la source de mes média image 
             e.preventDefault()
             let mediaType = media.src
             console.log(mediaType)
@@ -137,16 +138,10 @@ async function displayLightbox(event) {
                 containerMedia.innerHTML = ""
                 containerMedia.appendChild(lightboxImg);
             }
-            
-            if(mediaType.split('.').pop() == 'mp4'){
-                console.log('une video')
-                sourceVideo.src = e.currentTarget.src
-                lightboxVideo.appendChild(sourceVideo);
-                containerMedia.innerHTML = ""
-                containerMedia.appendChild(lightboxVideo)
-            }
+            lightboxModal.style.display = 'block'
         }
     })
+
 
     let currentSlideIndex = mediaIdx;
 
@@ -167,9 +162,10 @@ async function displayLightbox(event) {
               <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>
             `
         } else {
-            containerMedia.innerHTML = `<img id="lightbox-img" src="${media}"> 
-                                      <br> 
-                                      <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+            containerMedia.innerHTML = `
+                <img id="lightbox-img" src="${media}"> 
+                <br> 
+                <h1 class="lightbox-title">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
     })
 
@@ -204,7 +200,7 @@ async function displayLightbox(event) {
 }
 
 
-// en cours de construction ..
+
  async function displayBanner () {
     const photographer = await getPhotographers()
     const medias = photographer.media;

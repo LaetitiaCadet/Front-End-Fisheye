@@ -22,8 +22,9 @@ function displayModal() {
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
+    const first = document.getElementById('first');
+    first.focus()
     modal.style.display = "none";
-    modalConfirmation.style.display = "none";
 }
 
 function checkEntry(input, regex, errorId, errorMsg) {
@@ -53,10 +54,12 @@ function validate (event){
     const isLastNameValid = checkEntry(inputLastName, nameRegex, 'nom-error', 'Veuillez entrer 2 caractères ou plus pour le champ du nom.');
     const isEmailValid = checkEntry(inputEmail, emailRegex, 'email-error', " l'Email utiliser n'est pas valide.");
     if(isFirstNameValid && isLastNameValid && isEmailValid){
-      console.log(inputValue(inputFirstName))
-      console.log(inputValue(inputLastName))
-      console.log(inputValue(inputEmail))
-      console.log(inputValue(textArea))   
-  
+      console.log({
+        prenom: inputValue(inputFirstName),
+        nom: inputValue(inputLastName),
+        email: inputValue(inputEmail),
+        message: inputValue(textArea)
+      });
+      closeModal()
     }
 }

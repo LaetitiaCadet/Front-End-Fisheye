@@ -16,7 +16,7 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" aria-label="Open Contact form">Contactez-moi</button>
       </div>
       <div class="photograph-dropdown">
         <form class="form">
@@ -33,7 +33,7 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi<br><span id="photographer-name"></span></h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Close Contact form" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" role="button" aria-label="Close Contact form" tabindex="0" />
         </header>
 				<form name="contact" method="get" action="photographer.html"
         onsubmit="return validate(event)">
