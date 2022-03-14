@@ -17,13 +17,13 @@ const nameRegex = /^[A-Za-z_-]{2,30}$/;
 
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
+    const first = document.getElementById('first');
+    modal.style.display = "block";
+    first.focus();
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
-    const first = document.getElementById('first');
-    first.focus()
     modal.style.display = "none";
 }
 
