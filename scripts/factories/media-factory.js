@@ -2,7 +2,7 @@
 class ImageFactory {
     static render(media) {
        return `
-       <a href="#" onclick="displayLightbox(event)" onkeydown="return event.keyCode != 13 || displayLightbox(event);" role="button" aria-pressed="false" >
+       <a href="#" onclick="displayLightbox(event)" role="button" aria-pressed="false">
         <article class="media-section" ">
             <figure>
                 <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" alt="${media.title}">
@@ -27,7 +27,7 @@ class ImageFactory {
 class VideoFactory {
     static render(media) {
         return `
-         <a href="#" onclick="displayLightbox(event)" onkeydown="return event.keyCode != 13 || displayLightbox(event);" role="button" aria-pressed="false">
+         <a href="#" onclick="displayLightbox(event)" role="button" aria-pressed="false">
             <article class="media-section">
                 <figure>
                     <video controls >

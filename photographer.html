@@ -23,7 +23,7 @@
         </div>
         <div class="photograph-dropdown">
             <form class="form">
-                <label for="dropdown">Trier par</label>
+                <label for="dropdown" aria-label="Trier par">Trier par</label>
                 <select size="1" name="categorie" id="dropdown">
               <option value='popularity'>Popularité</option>
               <option value='date'>Date</option>
@@ -70,13 +70,13 @@
     <div id="lightbox_modal" role="dialog">
         <div class="lightbox_container">
             <header role="banner">
-                <a href="#" id="close_lightbox" role="button" tabindex="0">
+                <a href="#" id="close_lightbox" role="button">
                     <img src="assets/icons/close.svg" alt="close modal"  aria-label="image closeup view" />
                 </a>
             </header>
             <div id="lightbox_nav">
-                <a class="lightbox_prev" alt="previous image" tabindex="2"><i class="fa-solid fa-chevron-left fa-3x"></i></a >
-                <a class="lightbox_next" alt="next image" tabindex="1"><i class="fa-solid fa-chevron-right fa-3x"></i></a >
+                <a class="lightbox_prev" alt="previous image" tabindex="0" ><i class="fa-solid fa-chevron-left fa-3x"></i></a >
+                <a class="lightbox_next" alt="next image"tabindex="0" ><i class="fa-solid fa-chevron-right fa-3x"></i></a >
         </div>
         <div id="lightbox_media_container">
 

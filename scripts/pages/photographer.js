@@ -109,50 +109,47 @@ async function displayLightbox(event) {
     let source = event.target.src == "" ? event.target.children[0].src : event.target.src;
     let mediaIdx = mediaURLArray.indexOf(source)
 
-    const openLightboxImage = function (e) {   
-        
+
         photographerMediaTag.forEach(media => {
-    //création de ma lightbox en récupérant la source de mes média image   
-        let mediaType = media.src
-        console.log(mediaType)
-        if (mediaType.split('.').pop() == 'jpg'){
-            lightboxModal.style.display = 'block'
-            lightboxImg.id = "lightbox-img" 
-            // lightboxImg.src = event.currentTarget.src;
-            containerMedia.innerHTML = ""
-            containerMedia.appendChild(lightboxImg);
-        }
-        lightboxModal.style.display = 'block'
-        closeLightbox.focus();
-            
+            let mediaType = media.src
+                //création de ma lightbox en récupérant la source de mes média image   
+                media.addEventListener('click', function(e){
+                        if (mediaType.split('.').pop() == 'jpg'){
+                            console.log(mediaType)
+                            lightboxModal.style.display = 'block'
+                            lightboxImg.id = "lightbox-img" 
+                            lightboxImg.src = mediaType
+                            containerMedia.innerHTML = ""
+                            containerMedia.appendChild(lightboxImg);
+                        }
+                        lightboxModal.style.display = 'block'
+                        closeLightbox.focus();
+
+                })     
+
         })
-    }
-    
-    const openLightboxVideo =  function (e) {
-        closeLightbox.focus();
 
-        console.log(e.target.children[0].src)
-        // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
-        // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
-        if (e.target.children[0].src.split('.').pop() == 'mp4') {
-            const src = e.target.children[0].src
-            console.log(e.target.children[0].src);
+
+        document.addEventListener('click', function(event){
+            console.log(event.target.children[0].src)
+            // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
+            // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
+            if (event.target.children[0].src.split('.').pop() == 'mp4') {
+                const src = event.target.children[0].src
+                console.log(event.target.children[0].src);
+                sourceVideo.src = src
+                lightboxVideo.setAttribute('controls', 'true');
+                lightboxVideo.appendChild(sourceVideo);
+                containerMedia.innerHTML = ""
+                containerMedia.appendChild(lightboxVideo)
+            }
             lightboxModal.style.display = 'block'
-            sourceVideo.src = src
-            lightboxVideo.setAttribute('controls', 'true');
-            lightboxVideo.appendChild(sourceVideo);
-            containerMedia.innerHTML = ""
-            containerMedia.appendChild(lightboxVideo)
-        }
-    }   
+            closeLightbox.focus();
 
-    //LigthBox
-    if (event.keyCode === 13 || event.type == 'click'){
-        console.log(event.currentTarget)
-        openLightboxImage();
-        openLightboxVideo();
+        }) 
 
-    }
+
+
 
 
     let currentSlideIndex = mediaIdx;
@@ -179,6 +176,30 @@ async function displayLightbox(event) {
                 <br> 
                 <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
+
+        if(event.keyCode === 13 ){
+            if(currentSlideIndex > mediaURLArray.length ){
+                currentSlideIndex = 0     
+            }
+            let media = mediaURLArray[currentSlideIndex]
+            if (media.split('.').pop() == 'mp4') {
+                containerMedia.innerHTML = `
+                  <video controls>
+                        <source src="${media}" class="photographer-media">
+                  </video>
+                  <br> 
+                  <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+                `
+            } else {
+                containerMedia.innerHTML = `
+                    <img id="lightbox-img" src="${media}"> 
+                    <br> 
+                    <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+            }
+        }
+
+
+
     })
 
     btnPrev.addEventListener('click', function (e){
@@ -207,6 +228,7 @@ async function displayLightbox(event) {
     closeLightbox.addEventListener('click', function () {
         lightboxModal.style.display = 'none'
         containerMedia.innerHTML = ""
+
     })
 
 }
