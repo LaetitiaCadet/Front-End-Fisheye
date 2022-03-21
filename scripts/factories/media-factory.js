@@ -37,12 +37,12 @@ class VideoFactory {
                     </video>
                     <figcaption>
                     <section>
-                        <h1>${media.title}</h1> 
+                        <h1 tabindex="0">${media.title}</h1> 
                     </section>
                     <article>
-                        <span class="media-like" id="media-${media.id}">
+                        <span tabindex="0" class="media-like" id="media-${media.id}">
                             ${media.likes} 
-                            <i class="fas fa-heart btn-like" id="like-button-${media.id}"  aria-label= "appuyez pour aimée cette photo"></i>
+                            <i class="fas fa-heart btn-like" id="like-button-${media.id}" tabindex="0" aria-label= "appuyez pour aimée cette photo"></i>
                         </span>
                     </article>
                     </figcaption>

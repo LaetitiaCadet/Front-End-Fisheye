@@ -3,7 +3,7 @@
         //je met une pose sur le code avec le mot-clé "await" et je récupère les données avec 
         //la fonction fetch() avec en argument l'url de mon fichier data 
         try {
-            const response = await fetch('../data/photographers.json');
+            const response = await fetch('./scripts/data/photographers.json');
             const photographers = await response.json()
         // et bien retourner le tableau photographers seulement une fois
         //Je retourne le tableau d'objet en un format JSon
