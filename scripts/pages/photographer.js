@@ -111,6 +111,7 @@ async function displayLightbox(event) {
 
 
         photographerMediaTag.forEach(media => {
+            media.tabIndex = 0
             let mediaType = media.src
                 //création de ma lightbox en récupérant la source de mes média image   
                 media.addEventListener('click', function(e){
@@ -125,7 +126,21 @@ async function displayLightbox(event) {
                         lightboxModal.style.display = 'block'
                         closeLightbox.focus();
 
-                })     
+                })
+                
+                media.addEventListener('keypress', function(e){
+                    if (mediaType.split('.').pop() == 'jpg'){
+                        lightboxModal.style.display = 'block'
+                        lightboxImg.id = "lightbox-img" 
+                        lightboxImg.src = mediaType
+                        containerMedia.innerHTML = ""
+                        containerMedia.appendChild(lightboxImg);
+                        lightboxModal.style.display = 'block'
+                        closeLightbox.focus();
+                    }
+
+
+                })
 
         })
 
@@ -148,12 +163,30 @@ async function displayLightbox(event) {
 
         }) 
 
+        document.addEventListener('keypress', function(event){
+            console.log(event.target.children[0].src)
+            // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
+            // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
+            if (event.target.children[0].src.split('.').pop() == 'mp4') {
+                const src = event.target.children[0].src
+                console.log(event.target.children[0].src);
+                sourceVideo.src = src
+                lightboxVideo.setAttribute('controls', 'true');
+                lightboxVideo.appendChild(sourceVideo);
+                containerMedia.innerHTML = ""
+                containerMedia.appendChild(lightboxVideo)
+            }
+            lightboxModal.style.display = 'block'
+            closeLightbox.focus();
+
+        }) 
+
 
 
 
 
     let currentSlideIndex = mediaIdx;
-
+// au clic l'image avance à la suivante
     btnNext.addEventListener('click', function (e){
         e.preventDefault()
         currentSlideIndex ++;
@@ -168,13 +201,13 @@ async function displayLightbox(event) {
                     <source src="${media}" class="photographer-media">
               </video>
               <br> 
-              <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+              <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
             `
         } else {
             containerMedia.innerHTML = `
                 <img id="lightbox-img" src="${media}"> 
                 <br> 
-                <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
 
         if(event.keyCode === 13 ){
@@ -188,21 +221,93 @@ async function displayLightbox(event) {
                         <source src="${media}" class="photographer-media">
                   </video>
                   <br> 
-                  <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+                  <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
                 `
             } else {
                 containerMedia.innerHTML = `
                     <img id="lightbox-img" src="${media}"> 
                     <br> 
-                    <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+                    <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
             }
         }
 
 
 
     })
+// au keypress
+    btnNext.addEventListener('keypress', function (e){
+    e.preventDefault()
+    currentSlideIndex ++;
 
+    if(currentSlideIndex > mediaURLArray.length ){
+        currentSlideIndex = 0     
+    }
+    let media = mediaURLArray[currentSlideIndex]
+    if (media.split('.').pop() == 'mp4') {
+        containerMedia.innerHTML = `
+          <video controls>
+                <source src="${media}" class="photographer-media">
+          </video>
+          <br> 
+          <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+        `
+    } else {
+        containerMedia.innerHTML = `
+            <img id="lightbox-img" src="${media}"> 
+            <br> 
+            <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+    }
+
+    if(event.keyCode === 13 ){
+        if(currentSlideIndex > mediaURLArray.length ){
+            currentSlideIndex = 0     
+        }
+        let media = mediaURLArray[currentSlideIndex]
+        if (media.split('.').pop() == 'mp4') {
+            containerMedia.innerHTML = `
+              <video controls>
+                    <source src="${media}" class="photographer-media">
+              </video>
+              <br> 
+              <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+            `
+        } else {
+            containerMedia.innerHTML = `
+                <img id="lightbox-img" src="${media}"> 
+                <br> 
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+        }
+    }
+
+
+
+    })
+
+// au click sur le bouton fléché retour l"index initialiser a 0 passe à -1 on passe lindex au tableau de MediaUrl qui va lui aussi reculer a -1 et affichera dans le containerMedia l'image précédent.
     btnPrev.addEventListener('click', function (e){
+        e.preventDefault()
+        currentSlideIndex --;
+
+    if(currentSlideIndex <  0 ){
+        currentSlideIndex = mediaURLArray.length - 1
+        }
+        let media = mediaURLArray[currentSlideIndex]
+        if (media.split('.').pop() == 'mp4') {
+            containerMedia.innerHTML = `
+            <video controls>
+                    <source src="${media}" class="photographer-media">
+                </video>
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+            `
+        } else {
+            containerMedia.innerHTML = `
+            <img id="lightbox-img" src="${media}"> 
+                <br> 
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+        }
+    })
+
+    btnPrev.addEventListener('keypress', function (e){
         e.preventDefault()
         currentSlideIndex --;
 
@@ -215,25 +320,30 @@ async function displayLightbox(event) {
               <video controls>
                     <source src="${media}" class="photographer-media">
                 </video>
-                <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>
             `
         } else {
             containerMedia.innerHTML = `
             <img id="lightbox-img" src="${media}"> 
                 <br> 
-                <h1 class="lightbox-title" tabindex="3">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
+                <h1 class="lightbox-title" tabindex="0">`+ mediaTitleArray[currentSlideIndex] +`</h1>`
         }
+    })
+
+
+    closeLightbox.addEventListener('keypress', function () {
+        lightboxModal.style.display = 'none'
+        containerMedia.innerHTML = ""
     })
 
     closeLightbox.addEventListener('click', function () {
         lightboxModal.style.display = 'none'
         containerMedia.innerHTML = ""
-
     })
 
+
+
 }
-
-
 
  async function displayBanner () {
     const photographer = await getPhotographers()
@@ -274,7 +384,14 @@ async function displayLightbox(event) {
     bannerLike.appendChild(priceItem)
 
     btnLikes.forEach(like => {
+        like.setAttribut('aria-label', 'appuyez pour aimée cette photo');
         like.addEventListener('click', function () {
+            sum += 1
+            console.log(sum)
+            likeSum.innerHTML = sum + '<i class="fas fa-heart 2x"></i>' + ''
+        })
+
+        like.addEventListener('keypress', function () {
             sum += 1
             console.log(sum)
             likeSum.innerHTML = sum + '<i class="fas fa-heart 2x"></i>' + ''

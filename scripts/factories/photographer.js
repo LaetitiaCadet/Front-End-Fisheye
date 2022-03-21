@@ -87,10 +87,18 @@ function photographerFactory(data) {
             let numLike = likes;
             if (e.target.id == `like-button-${medium.id}`) {
                 e.target.parentElement.innerHTML = `
-                  ${numLike += 1} <i class="fas fa-heart 2x" id="like-button-${medium.id}"></i>
+                  ${numLike += 1} <i class="fas fa-heart 2x" id="like-button-${medium.id}" tabindex="0" aria-label="appuyez pour aimé cette photo"></i>
                 `
             }
-        }) 
+        })
+        document.addEventListener('keypress', function (e) {
+            let numLike = likes;
+            if (e.target.id == `like-button-${medium.id}`) {
+                e.target.parentElement.innerHTML = `
+                  ${numLike += 1} <i class="fas fa-heart 2x" id="like-button-${medium.id}" tabindex="0" aria-label="appuyez pour aimé cette photo"></i>
+                `
+            }
+        })
         const mediaTag = MediaFactory.render(medium);
         return mediaTag;
     }
