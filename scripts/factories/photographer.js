@@ -48,6 +48,8 @@ function photographerFactory(data) {
 
 
     function getUserProfil() {
+        //création du prototype du header de la page photographer.html
+        //nom info Image profile du photographe
         const photographHeader = document.querySelector(".photograph-header");
         const modal = document.querySelector('.contact_button')
         const infoProfil = document.createElement('article');
@@ -82,7 +84,7 @@ function photographerFactory(data) {
     }
 
     function showMedia(medium) {
-
+        // la fonction show media affiche la liste des médias des photographe en rendant le mediaFactory dans la variable mediaTag
         document.addEventListener('click', function (e) {
             let numLike = likes;
             if (e.target.id == `like-button-${medium.id}`) {

@@ -1,7 +1,7 @@
 //Mettre le code JavaScript lié à la page photographer.html
 //avec URLSearchParams je cherche l'id dans mon lien 
 let params = new URLSearchParams(document.location.search);
-//Et je récupère l'id avec la fonction get 
+//Et je récupère l'id avec la fonction get et je l'ajoute a ma variable params
 let id = params.get("id"); // 
 
 const photographHeader = document.querySelector(".photograph-header");
@@ -26,10 +26,11 @@ function filterUser(users){
 
 
 async function dataUser() {
-    // je récupère dans ma variable les donnée de mon fichier json dans la fonction getPhotographers
+    // je récupère dans ma variable les donnée de mon fichier json avec la fonction getPhotographers
     // qui se trouve dans le fichier index.js 
     const photographer = await getPhotographers()
     const profils = photographer.photographers;
+    //et je retourne les profils des photographe filters par id 
     return filterUser(profils)  
     
 }
@@ -44,7 +45,7 @@ async function dataUserMedia() {
 }
 
 async function dataSortBy(){
-
+    // ici je crée un fonction qui permet de trier mes datas par popularité par date et par nom 
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id)
@@ -86,6 +87,7 @@ dataSortBy()
 
 
 async function displayLightbox(event) {
+    // ma function consiste a crée la gallerie d'image/video dans une lightbox et de l'afficher au clic sur un media
     event.preventDefault()
     const photographer = await getPhotographers()
     const medias = photographer.media;
@@ -143,8 +145,8 @@ async function displayLightbox(event) {
                 })
 
         })
-
-
+            // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
+            // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans            
         document.addEventListener('click', function(event){
             console.log(event.target.children[0].src)
             // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
@@ -236,6 +238,7 @@ async function displayLightbox(event) {
     })
 // au keypress
     btnNext.addEventListener('keypress', function (e){
+    console.log(e.keyCode)
     e.preventDefault()
     currentSlideIndex ++;
 
@@ -346,6 +349,8 @@ async function displayLightbox(event) {
 }
 
  async function displayBanner () {
+     //ici j'affiche la petit banière qui est fixé au pied de page 
+     // elle affiche la totalité des like et le prix du service 
     const photographer = await getPhotographers()
     const medias = photographer.media;
     const photographeMedia = medias.filter(media => media.photographerId == id);
