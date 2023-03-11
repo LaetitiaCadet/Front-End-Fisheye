@@ -148,12 +148,12 @@ async function displayLightbox(event) {
             // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
             // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans            
         document.addEventListener('click', function(event){
-            console.log(event.target.children[0].src)
+            // console.log(event.target.children[0].src)
             // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
             // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
             if (event.target.children[0].src.split('.').pop() == 'mp4') {
                 const src = event.target.children[0].src
-                console.log(event.target.children[0].src);
+                // console.log(event.target.children[0].src);
                 sourceVideo.src = src
                 lightboxVideo.setAttribute('controls', 'true');
                 lightboxVideo.appendChild(sourceVideo);
@@ -166,12 +166,12 @@ async function displayLightbox(event) {
         }) 
 
         document.addEventListener('keypress', function(event){
-            console.log(event.target.children[0].src)
+            // console.log(event.target.children[0].src)
             // au click sur le dom si l'élément correspond à la class indiquer et que la source de l'enfant 
             // est de type mp4 , je lance ma lightbox et affiche l'élement video dedans 
             if (event.target.children[0].src.split('.').pop() == 'mp4') {
                 const src = event.target.children[0].src
-                console.log(event.target.children[0].src);
+                // console.log(event.target.children[0].src);
                 sourceVideo.src = src
                 lightboxVideo.setAttribute('controls', 'true');
                 lightboxVideo.appendChild(sourceVideo);
@@ -186,9 +186,9 @@ async function displayLightbox(event) {
 
 
 
-
+    // au clic l'image avance à la suivante
     let currentSlideIndex = mediaIdx;
-// au clic l'image avance à la suivante
+
     btnNext.addEventListener('click', function (e){
         e.preventDefault()
         currentSlideIndex ++;
@@ -393,13 +393,13 @@ async function displayLightbox(event) {
         like.addEventListener('click', function () {
             sum += 1
             console.log(sum)
-            likeSum.innerHTML = sum + '<i class="fas fa-heart 2x"></i>' + ''
+            likeSum.innerHTML = sum + '<i class="fa-regular fa-heart"></i>' + ''
         })
 
         like.addEventListener('keypress', function () {
             sum += 1
             console.log(sum)
-            likeSum.innerHTML = sum + '<i class="fas fa-heart 2x"></i>' + ''
+            likeSum.innerHTML = sum + '<i class="fa-regular fa-heart"></i>' + ''
         })
     })
     
