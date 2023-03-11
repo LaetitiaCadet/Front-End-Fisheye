@@ -4,7 +4,7 @@ function photographerFactory(data) {
     const picture = `assets/images/photographers/${portrait}`;
     const mediaItems = `assets/images/media/${image}`
     const cityCountry = `${city}, ` + `${country}`;
-    const photographerLink = `/photographer.html?id=${id}`;
+    const photographerLink = `./photographer.html?id=${id}`;
     
 
     function getUserCardDOM() {
