@@ -5,7 +5,7 @@ class ImageFactory {
        <a href="#" onclick="displayLightbox(event)" role="button" aria-pressed="false">
         <article class="media-section" ">
             <figure>
-                <img class="photographer-media" src="../assets/images/media/${media.image}" id="media-image-${media.id}" alt="${media.title}">
+                <img class="photographer-media" src="./assets/images/media/${media.image}" id="media-image-${media.id}" alt="${media.title}">
                 <figcaption>
                 <section>
                     <h1 tabindex="0">${media.title}</h1>
@@ -31,8 +31,8 @@ class VideoFactory {
             <article class="media-section">
                 <figure>
                     <video controls >
-                        <source class="photographer-media" src="../assets/images/media/${media.video}" type="video/mp4" alt="${media.title}">
-                        <track label="French srclang="fr" src="../assets/images/media/${media.title}">
+                        <source class="photographer-media" src="./assets/images/media/${media.video}" type="video/mp4" alt="${media.title}">
+                        <track label="French srclang="fr" src="./assets/images/media/${media.title}">
                         Sorry, your browser doesn't support embedded video.
                     </video>
                     <figcaption>
